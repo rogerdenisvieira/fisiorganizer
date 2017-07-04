@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url
 from django.views.static import serve
-from Fisiorganizer_SITE.views import main_view, customer_view, class_view
+from Fisiorganizer_SITE.views import main_view, customer_view, session_view
 
 
 urlpatterns = [
@@ -14,10 +14,10 @@ urlpatterns = [
     url(r'^customer/view', customer_view.show, name='customer_show'),
 
     #rotas para as aulas
-    url(r'^class/edit', class_view.edit, name='class_edit'),
-    url(r'^class/delete', class_view.delete, name='class_delete'),
-    url(r'^class/create', class_view.create, name='class_create'),
-    url(r'^class/view', class_view.show, name='class_show')
+    url(r'^session/edit', session_view.edit, name='session_edit'),
+    url(r'^session/delete', session_view.delete, name='session_delete'),
+    url(r'^session/create', session_view.create, name='session_create'),
+    url(r'^session/view', session_view.show, name='session_show')
 
 
 
