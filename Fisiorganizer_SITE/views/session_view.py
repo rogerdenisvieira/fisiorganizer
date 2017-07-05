@@ -1,18 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from Fisiorganizer_SITE.models import Session
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-@login_required
-def create(request):
-    return HttpResponse("criar aula")
 
-def edit(request):
-    return HttpResponse("editar aula")
+login_required
+class SessionCreate(CreateView):
+    model = Session
+    fields = ['id_instructor']
 
-def delete(request):
-    return HttpResponse("excluir aula")
-
-def show(request):
-    return HttpResponse("ver aula")
 
 

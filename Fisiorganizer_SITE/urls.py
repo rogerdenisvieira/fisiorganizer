@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.views.static import serve
 from Fisiorganizer_SITE.views import main_view, customer_view, session_view, account_view
+from Fisiorganizer_SITE.views.session_view import SessionCreate
 
 
 urlpatterns = [
@@ -14,10 +15,8 @@ urlpatterns = [
     url(r'^customer/view', customer_view.show, name='customer_show'),
 
     #rotas para as aulas
-    url(r'^session/edit', session_view.edit, name='session_edit'),
-    url(r'^session/delete', session_view.delete, name='session_delete'),
-    url(r'^session/create', session_view.create, name='session_create'),
-    url(r'^session/view', session_view.show, name='session_show'),
+    url(r'^session/create/$', SessionCreate.as_view(), name='session_create'),
+
 
     #rotas para autenticação
     url(r'^account/login', account_view.login_user, name='account_login')
