@@ -7,19 +7,21 @@ from Fisiorganizer_SITE.views import main_view, customer_view, session_view, acc
 urlpatterns = [
     url(r'^$', main_view.index, name='index'),
 
-    #rotas para os alunos
+    # route for customers
     url(r'^customer/edit', customer_view.edit, name='customer_edit'),
     url(r'^customer/delete', customer_view.delete, name='customer_delete'),
     url(r'^customer/create', customer_view.create, name='customer_create'),
-    url(r'^customer/view', customer_view.show, name='customer_show'),
+    url(r'^customer/details', customer_view.details, name='customer_details'),
+    url(r'^customer/list', customer_view.list, name='customer_list'),
 
-    #rotas para as aulas
+    # routes for sessions
     url(r'^session/edit', session_view.edit, name='session_edit'),
     url(r'^session/delete', session_view.delete, name='session_delete'),
     url(r'^session/create', session_view.create, name='session_create'),
-    url(r'^session/view', session_view.show, name='session_show'),
+    url(r'^session/details', session_view.details, name='session_details'),
+    url(r'^session/list', session_view.list, name='session_list'),
 
-    #rotas para autenticação
+    # routes used for authentication
     url(r'^account/login', account_view.login_user, name='account_login')
 
 
