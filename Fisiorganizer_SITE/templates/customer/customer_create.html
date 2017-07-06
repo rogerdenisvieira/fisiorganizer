@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+{% extends "header.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<h1>Cadastro de Novo Cliente</h1>
+
+
+<form class="form-inline" action="/dog/create/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    {% for field in customerForm %}
+    <label>{{field.label}}</label>
+    <p>{{field|add_class:"form-control"}}</p>
+    {% endfor %}
+</form>
+
+    </div>
+
+
+{% endblock %}
+
+</body>
+</html>
