@@ -25,7 +25,7 @@ SECRET_KEY = 'm@z10807@d-%tu#j_av_#aqser=g^e+muj49wtc9&@hh#-1hg4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fisiorganizer.herokuapp.com']
 
 
 # Application definition
