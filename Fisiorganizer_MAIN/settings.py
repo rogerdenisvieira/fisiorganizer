@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+# noinspection PyPackageRequirements
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
