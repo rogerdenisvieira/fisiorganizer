@@ -9,20 +9,24 @@
 {% block content %}
 
 <div class="container">
-<h1>Cadastro de Nova Aula</h1>
+    <h1>Cadastro de Nova Aula</h1>
 
+    <form class="form-inline" action="/dog/create/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in sessionForm %}
+        <label>{{field.label}}</label>
+        <p>{{field|add_class:"form-control"}}</p>
+        {% endfor %}
 
-<form class="form-inline" action="/dog/create/" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true">&nbsp;</span>Salvar
+        </button>
 
-
-    {% for field in sessionForm %}
-    <label>{{field.label}}</label>
-    <p>{{field|add_class:"form-control"}}</p>
-    {% endfor %}
-</form>
-
-    </div>
+        <a href="#" class="btn btn-danger" role="button">
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Cancelar
+        </a>
+    </form>
+</div>
 
 
 {% endblock %}
