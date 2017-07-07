@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from Fisiorganizer_SITE.views import main_view, account_view
-from Fisiorganizer_SITE.models import User_extra
+from Fisiorganizer_SITE.models import UserExtra
 from Fisiorganizer_SITE.forms import LoginForm
 
 
@@ -21,7 +21,7 @@ def login_user(request):
             user_to_lock = User.objects.get(username=request.POST['username'])
 
             # retorna as informações extras do usuário
-            extra = User_extra.objects.get(id_user=user_to_lock)
+            extra = UserExtra.objects.get(id_user=user_to_lock)
 
             # verifica se a contagem é menos que a do arquivo de configuração
             if extra.attempts < getattr(settings, "TENTATIVAS_LOGIN", None):

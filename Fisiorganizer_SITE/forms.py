@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ModelChoiceField, DateField
-from Fisiorganizer_SITE.models import Customer, Session
+from Fisiorganizer_SITE.models import Customer, Session, Exercise
 import datetime
 
 
@@ -21,7 +21,7 @@ class LoginForm(ModelForm):
         fields = ['username', 'password']
 
         labels = {
-            'username': ('Usuário'),
+            'username': 'Usuário',
         }
 
 
@@ -41,8 +41,14 @@ class SessionForm(ModelForm):
         }
 
         labels = {
-            'id_instructor': ('Professor'),
-            'id_customer' : ('Aluno'),
-            'date' : ('Data'),
-            'time' : ('Hora')
+            'id_instructor': 'Professor',
+            'id_customer': 'Aluno',
+            'date': 'Data',
+            'time': 'Hora'
         }
+
+class ExerciseForm(ModelForm):
+    class Meta:
+        model = Exercise
+        fields = "__all__"
+
