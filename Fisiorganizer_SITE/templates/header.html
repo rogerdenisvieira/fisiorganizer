@@ -50,7 +50,7 @@
           </ul>
         </li>
 
-                <li class="dropdown">
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exercícios <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'exercise_create' %}">Adicionar</a></li>
@@ -60,6 +60,7 @@
         </li>
 
       </ul>
+      {% if not user.is_authenticated %}
 
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -71,6 +72,12 @@
           </ul>
         </li>
       </ul>
+
+
+      {% csrf_token %} {% else %}
+
+      {% endif %}
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
