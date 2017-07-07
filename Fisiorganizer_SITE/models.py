@@ -21,6 +21,7 @@ class Customer(models.Model):
 class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=150, blank=False)
+    reference = models.CharField(max_length=200, blank=True)
     description = models.TextField(max_length=500, blank=False)
 
 
@@ -45,7 +46,7 @@ class SessionExercise(models.Model):
     alias = models.CharField(max_length=150, blank=False)
 
 
-class User_extra(models.Model):
+class UserExtra(models.Model):
     id = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User)
     attempts = models.PositiveIntegerField(blank=False, null=False, default=0)
