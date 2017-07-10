@@ -15,10 +15,10 @@ urlpatterns = [
     url(r'^customer/list', customer_view.list, name='customer_list'),
 
     # routes for sessions
-    url(r'^session/edit', session_view.edit, name='session_edit'),
+    url(r'^session/edit/(?P<id>[0-9]{1})', session_view.edit, name='session_edit'),
     url(r'^session/delete', session_view.delete, name='session_delete'),
     url(r'^session/create', session_view.create, name='session_create'),
-    url(r'^session/details', session_view.details, name='session_details'),
+    url(r'^session/details/(?P<id>[0-9]{1})', session_view.details, name='session_details'),
     url(r'^session/list', session_view.list, name='session_list'),
 
     # routes for exercises

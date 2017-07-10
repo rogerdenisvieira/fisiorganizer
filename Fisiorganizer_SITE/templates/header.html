@@ -6,8 +6,12 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/jquery.dataTables.min.css' %}">
     <script src="{% static '/js/jquery.js' %}"></script>
     <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static '/js/dataTables.bootstrap.min.js' %}"></script>
+
 
     <meta charset="UTF-8">
     <title>Fisiorganizer</title>
@@ -39,7 +43,7 @@
                        aria-expanded="false">Aulas <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'session_create' %}">Adicionar</a></li>
-                        <li><a href="#">Ver</a></li>
+                        <li><a href="{% url 'session_list' %}">Ver</a></li>
 
                     </ul>
                 </li>

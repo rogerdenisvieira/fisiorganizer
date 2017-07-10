@@ -14,7 +14,7 @@
 <body>
 
 
-<h1>Todos os alunos</h1>
+<h1>Todos as aulas</h1>
 
 <br>
 
@@ -23,36 +23,49 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Nome</th>
-            <th>Ação</th>
+            <th>Professor</th>
+            <th>Aluno</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Ações</th>
         </tr>
         </thead>
 
         <tbody>
-        {% for c in customers %}
+        {% for s in sessions %}
         <tr>
             <td>
-                {{ c.id }}
+                {{ s.id }}
+            </td>
+            <td>
+                {{ s.id_instructor.first_name }} {{ s.id_instructor.last_name }}
+            </td>
+            <td>
+                {{ s.id_customer.name }} {{ s.id_customer.surname }}
+
+            </td>
+            <td>
+                {{ s.date }}
+            </td>
+           <td>
+                {{ s.time }}
             </td>
 
 
             <td>
-                {{c.name}} {{c.surname}}
-            </td>
-            <td>
-                <a href="{% url 'customer_details' id=c.id %}" class="" role="button">
+                <a href="{% url 'session_details' id=s.id %}" class="" role="button">
                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
                 </a>
                 <span>&nbsp;</span>
 
 
-                <a href="{% url 'customer_edit' id=c.id %}" class="" role="button">
+                <a href="{% url 'session_edit' id=s.id %}" class="" role="button">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
                 </a>
 
                 <span>&nbsp;</span>
 
-                <a class="" role="button" name="delete" data-id="{{ c.id }}">
+                <a class="" role="button" name="delete" data-id="{{ s.id }}">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
                 </a>
             </td>
@@ -61,8 +74,8 @@
         </tbody>
     </table>
 
-    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-success" role="button">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo aluno
+    <a href="{% url 'session_create' %}" id="id_add_session" class="btn btn-success" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Marcar aula
     </a>
 
 </div>
@@ -83,7 +96,6 @@
         "paging":   true,
         "ordering": true,
         "info":     true
-
      }
 
     );

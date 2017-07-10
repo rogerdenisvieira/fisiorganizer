@@ -18,7 +18,6 @@ def create(request):
             customer.surname = request.POST['surname']
             customer.address = request.POST['address']
             customer.city = request.POST['city']
-            customer.phone = request.POST['phone']
             customer.cellphone = request.POST['cellphone']
             customer.CEP = request.POST['CEP']
             customer.age = request.POST['age']
@@ -37,11 +36,24 @@ def edit(request, id):
     customer = get_object_or_404(Customer, id=id)
 
     if request.method == 'POST':
-        print('isto foi um post')
+        customer_form = CustomerForm(request.POST, instance=customer)
+
+        if customer_form.is_valid():
+            customer = customer_form.save(commit=False)
+            customer.name = request.POST['name']
+            customer.surname = request.POST['surname']
+            customer.address = request.POST['address']
+            customer.city = request.POST['city']
+            customer.cellphone = request.POST['cellphone']
+            customer.CEP = request.POST['CEP']
+            customer.age = request.POST['age']
+            customer.details = request.POST['details']
+            customer.save()
+
+            return redirect(customer_view.list)
     else:
         customer_form = CustomerForm(instance=customer)
-
-    return render(request, 'customer/customer_edit.html', {'customer_form':customer_form, 'customer':customer })
+        return render(request, 'customer/customer_edit.html', {'customer_form': customer_form, 'customer':customer })
 
 
 def delete(request):
@@ -55,7 +67,6 @@ def details(request, id):
         'Nome': customer.name,
         'Sobrenome': customer.surname,
         'Endereço': customer.address,
-        'Telefone': customer.phone,
         'Celular': customer.cellphone,
         'CEP': customer.CEP,
         'Idade': customer.age,
