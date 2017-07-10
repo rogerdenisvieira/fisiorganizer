@@ -11,7 +11,7 @@
 <div class="container">
     <h1>Cadastro de Novo Exercício</h1>
 
-    <form class="form-inline" action="/dog/create/" method="post" enctype="multipart/form-data">
+    <form class="form-inline" action="{{ url 'exercise_create' }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in exerciseForm %}
         <label>{{field.label}}</label>

@@ -12,7 +12,7 @@
     <h1>Cadastro de Novo Cliente</h1>
 
 
-    <form class="form-inline" action="/dog/create/" method="post" enctype="multipart/form-data">
+    <form class="form-inline" action="{% url 'customer_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
 

@@ -10,6 +10,15 @@
 {% load static %}
 {% block content %}
 
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.extra_tags}}">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong> {{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-3">Bem-vindo ao Fisiorganizer</h1>
@@ -18,10 +27,15 @@
             unique.</p>
     </div>
 </div>
+
+{% if user.is_authenticated %}
+
 <div class="container">
 
     <h1> Sua agenda para esta {{ dayOfWeek }}:</h1>
 </div>
+
+{% endif %}
 
 
 </body>

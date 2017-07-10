@@ -40,7 +40,7 @@ def login_user(request):
                         message = 'Usuário inativo.'
                 else:
                     message = 'Falha na autenticação.'
-                    extra.Tentativas += 1
+                    extra.attempts += 1
                     extra.save()
             else:
                 message = 'Seu usuário foi bloqueado. Entre em contato com o administrador.'

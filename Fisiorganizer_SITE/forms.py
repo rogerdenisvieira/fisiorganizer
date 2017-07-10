@@ -30,6 +30,18 @@ class CustomerForm(ModelForm):
         model = Customer
         fields = "__all__"
 
+        labels = {
+            'name' : 'Nome',
+            'surname' : 'Sobrenome',
+            'address' : 'Endereço',
+            'city' : 'Cidade',
+            'phone' : 'Telefone',
+            'cellphone':'Celular',
+            'CEP':'CEP',
+            'age':'Idade',
+            'details':'Detalhes'
+        }
+
 
 class SessionForm(ModelForm):
     class Meta:
