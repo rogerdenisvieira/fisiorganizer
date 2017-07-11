@@ -53,11 +53,13 @@ class SessionForm(ModelForm):
         }
 
         labels = {
-            'id_instructor': 'Professor',
+            'id_instructor': 'Profissional',
             'id_customer': 'Aluno',
+            'id_modality': 'Modalidade',
             'date': 'Data',
             'time': 'Hora'
         }
+
 
 class ExerciseForm(ModelForm):
     class Meta:

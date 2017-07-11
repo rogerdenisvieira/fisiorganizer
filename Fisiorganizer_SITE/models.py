@@ -17,8 +17,15 @@ class Customer(models.Model):
     details = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
-        return  str(self.id) + ' - ' + self.name + ' ' + self.surname
+        return str(self.id) + ' - ' + self.name + ' ' + self.surname
 
+
+class Modality(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=150, blank=False)
+
+    def __str__(self):
+        return self.name
 
 
 class Exercise(models.Model):
@@ -36,6 +43,7 @@ class Role(models.Model):
     
 class Session(models.Model):
     id = models.AutoField(primary_key=True)
+    id_modality = models.ForeignKey(Modality)
     id_instructor = models.ForeignKey(User)
     id_customer = models.ForeignKey(Customer)
     date = models.DateField()
@@ -53,3 +61,4 @@ class UserExtra(models.Model):
     id = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User)
     attempts = models.PositiveIntegerField(blank=False, null=False, default=0)
+
