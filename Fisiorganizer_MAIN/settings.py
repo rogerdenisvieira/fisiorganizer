@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Fisiorganizer_SITE',
-    'widget_tweaks'
+    'widget_tweaks',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
