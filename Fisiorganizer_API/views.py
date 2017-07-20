@@ -6,6 +6,7 @@ from Fisiorganizer_SITE.models import Customer
 from Fisiorganizer_API.serializers import CustomerSerializer
 
 
+
 @api_view(['GET'])
 def get_customer_by_id(request, id):
     customers = Customer.objects.filter(id=id)
