@@ -7,7 +7,7 @@
 
 
 
-<h1>Todos as aulas</h1>
+<h1 class="text-center">Todas as aulas</h1>
 
 <hr>
     <table id="customersTable" class="table">
@@ -16,6 +16,7 @@
             <th>Id</th>
             <th>Profissional</th>
             <th>Aluno/Paciente</th>
+            <th>Modalidade</th>
             <th>Data</th>
             <th>Hora</th>
             <th>Ações</th>
@@ -32,8 +33,11 @@
                 {{ s.id_instructor.first_name }} {{ s.id_instructor.last_name }}
             </td>
             <td>
-                {{ s.id_customer.name }} {{ s.id_customer.surname }}
+                {{ s.id_customer.name }}
 
+            </td>
+            <td>
+                {{ s.id_modality.name }}
             </td>
             <td>
                 {{ s.date }}

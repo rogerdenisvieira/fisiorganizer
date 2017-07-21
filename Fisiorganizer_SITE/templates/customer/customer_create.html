@@ -3,9 +3,13 @@
 {% load static %}
 {% block content %}
 
-    <h1>Cadastro de Aluno</h1>
-<hr>
+    <h1 class="text-center">Cadastro de Aluno</h1>
 
+<div class="col-sm-2"></div>
+
+<div class="col-md-8">
+    
+<hr>    
     <form class="form-group" action="{% url 'customer_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -26,6 +30,9 @@
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Cancelar
         </a>
     </form>
+    </div>
+
+<div class="col-sm-2"></div>
 
 
 {% endblock %}

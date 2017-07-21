@@ -27,7 +27,7 @@ def create(request):
         return render(request, 'session/session_create.html', {'sessionForm': session_form})
 
 
-def edit(request):
+def edit(request, id):
     return HttpResponse("editar aula")
 
 

@@ -5,8 +5,8 @@
 {% load widget_tweaks %}
 
 
-<h1>Autenticação</h1>
-<hr>
+<h1 class="text-center">Autenticação</h1>
+
 {% if messages %}
 {% for message in messages %}
 <div class="alert {{message.extra_tags}}">
@@ -15,6 +15,11 @@
 </div>
 {% endfor %}
 {% endif %}
+
+<div class="container col-sm-4"></div>
+
+<div class="col-sm-4">
+<hr>
 
     <form class="form-group" method="post" action="{% url 'account_login' %}">
     {% csrf_token %}
@@ -33,6 +38,11 @@
         Cancelar
     </a>
 </form>
+</div>
+
+<div class="container col-sm-4"></div>
+
+
 
 
 {% endblock %}

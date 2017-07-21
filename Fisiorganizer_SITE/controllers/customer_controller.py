@@ -39,11 +39,9 @@ def edit(request, id):
         if customer_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.name = request.POST['name']
-            customer.surname = request.POST['surname']
             customer.address = request.POST['address']
             customer.city = request.POST['city']
             customer.cellphone = request.POST['cellphone']
-            customer.CEP = request.POST['CEP']
             customer.age = request.POST['age']
             customer.details = request.POST['details']
             customer.save()
@@ -63,10 +61,8 @@ def details(request, id):
 
     dto = {
         'Nome': customer.name,
-        'Sobrenome': customer.surname,
         'Endereço': customer.address,
         'Celular': customer.cellphone,
-        'CEP': customer.CEP,
         'Idade': customer.age,
         'Detalhes': customer.details
     }

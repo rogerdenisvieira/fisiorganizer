@@ -4,9 +4,13 @@
 {% load static %}
 {% block content %}
 
-<h1>Página de detalhamento de usuário</h1>
+<h1 class="text-center">Detalhes do aluno</h1>
 
 
+
+<div class="col-sm-2"></div>
+<div class="col-md-8">
+    <hr>
     <table class="table table-striped">
 
         <tbody>
@@ -23,10 +27,15 @@
 
         </tbody>
     </table>
-
-    <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
+    <hr>
+    
+    
+        <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>Voltar
     </a>
+    </div>
+<div class="col-sm-2"></div>
+  
 
 
 {% endblock %}

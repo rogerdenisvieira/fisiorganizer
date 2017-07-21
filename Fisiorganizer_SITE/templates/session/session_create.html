@@ -3,8 +3,13 @@
 {% load static %}
 {% block content %}
 
-    <h1>Cadastro de Sessão</h1>
-<hr>
+    <h1 class="text-center">Cadastro de Sessão</h1>
+
+
+<div class="col-sm-2"></div>
+
+<div class="col-md-8">
+    <hr>
     <form class="form-group" action="{% url 'session_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in sessionForm %}
@@ -22,6 +27,10 @@
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Cancelar
         </a>
     </form>
+
+    </div>
+
+    <div class="col-sm-2"></div>
 
 
 {% endblock %}
