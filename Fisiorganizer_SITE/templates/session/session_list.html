@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
 
-{% extends "header.html" %}
+
+{% extends "layout.html" %}
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
 
-<head>
-
-
-</head>
-
-<body>
 
 
 <h1>Todos as aulas</h1>
 
-<br>
-
-<div class="container">
+<hr>
     <table id="customersTable" class="table">
         <thead>
         <tr>
@@ -73,12 +64,11 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{% url 'session_create' %}" id="id_add_session" class="btn btn-success" role="button">
+<hr>
+    <a href="{% url 'session_create' %}" id="id_add_session" class="btn btn-default" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Marcar aula
     </a>
 
-</div>
 
 <script>
     $(document).ready(function() {
@@ -104,6 +94,4 @@
 
 </script>
 
-</body>
-</html>
 {% endblock %}

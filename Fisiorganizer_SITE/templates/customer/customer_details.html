@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<body>
-
-{% extends "header.html" %}
+{% extends "layout.html" %}
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
 
 <h1>Página de detalhamento de usuário</h1>
 
-<div class="container">
+
     <table class="table table-striped">
 
         <tbody>
@@ -28,16 +24,12 @@
         </tbody>
     </table>
 
-    <a href="javascript:history.go(-1)" class="btn btn-success" role="button">
+    <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>Voltar
     </a>
 
 
-</div>
-
 {% endblock %}
 
-</body>
-</html>
 
 

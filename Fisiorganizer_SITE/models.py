@@ -7,17 +7,15 @@ from django.contrib.auth.models import User
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
     # id_state = models.ForeignKey(State, default='1')
-    name = models.CharField(max_length=50, blank=False, default='')
-    surname = models.CharField(max_length=150, blank=True)
+    name = models.CharField(max_length=100, blank=False, default='')
     address = models.CharField(max_length=150, blank=True)
     city = models.CharField(max_length=25)
     cellphone = models.PositiveIntegerField(blank=False, null=False)
-    CEP = models.PositiveIntegerField(blank=True, null=True)
     age = models.IntegerField(blank=False)
     details = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
-        return str(self.id) + ' - ' + self.name + ' ' + self.surname
+        return str(self.id) + ' - ' + self.name
 
 
 class Modality(models.Model):

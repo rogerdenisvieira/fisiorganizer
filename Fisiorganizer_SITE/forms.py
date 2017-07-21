@@ -31,13 +31,11 @@ class CustomerForm(ModelForm):
         fields = "__all__"
 
         labels = {
-            'name' : 'Nome',
-            'surname' : 'Sobrenome',
+            'name' : 'Nome Completo',
             'address' : 'Endereço',
             'city' : 'Cidade',
             'phone' : 'Telefone',
             'cellphone':'Celular',
-            'CEP':'CEP',
             'age':'Idade',
             'details':'Detalhes'
         }

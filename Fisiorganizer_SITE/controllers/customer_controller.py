@@ -15,11 +15,9 @@ def create(request):
         if form.is_valid():
             customer = form.save(commit=False)
             customer.name = request.POST['name']
-            customer.surname = request.POST['surname']
             customer.address = request.POST['address']
             customer.city = request.POST['city']
             customer.cellphone = request.POST['cellphone']
-            customer.CEP = request.POST['CEP']
             customer.age = request.POST['age']
             customer.details = request.POST['details']
             customer.save()

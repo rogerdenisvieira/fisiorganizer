@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
-
-<body>
-
-{% extends 'header.html' %}
+{% extends 'layout.html' %}
 {% load static %}
 {% block content %}
 
 {% load widget_tweaks %}
 
 
-<div class="container">
 <h1>Autenticação</h1>
-
+<hr>
 {% if messages %}
 {% for message in messages %}
 <div class="alert {{message.extra_tags}}">
@@ -24,7 +16,7 @@
 {% endfor %}
 {% endif %}
 
-    <form class="form-inline" method="post" action="{% url 'account_login' %}">
+    <form class="form-group" method="post" action="{% url 'account_login' %}">
     {% csrf_token %}
 
     {% for field in LoginForm %}
@@ -32,22 +24,15 @@
     <p>{{field|add_class:"form-control"}}</p>
     {% endfor %}
 
-    <button class="btn btn-primary " type="submit" name="btnLogin" value="Entrar">
-        <span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>Entrar
+    <hr>
+    <button class="btn btn-default" type="submit" name="btnLogin" value="Entrar">
+        Entrar
     </button>
 
     <a href="javascript:history.go(-1)" class="btn btn-danger" role="button">
-        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Cancelar
+        Cancelar
     </a>
 </form>
-</div>
 
-
-
-
-
-
-</body>
-</html>
 
 {% endblock %}

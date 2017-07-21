@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-{% extends "header.html" %}
+{% extends "layout.html" %}
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
 
-<head>
-
-
-</head>
-
-<body>
-
 
 <h1>Todos os alunos</h1>
 
-<br>
-
-<div class="container">
+<hr>
     <table id="customersTable" class="table">
         <thead>
         <tr>
@@ -60,12 +48,10 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-success" role="button">
+<hr>
+    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-default" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo aluno
     </a>
-
-</div>
 
 <script>
     $(document).ready(function() {
@@ -92,6 +78,5 @@
 
 </script>
 
-</body>
-</html>
+
 {% endblock %}
