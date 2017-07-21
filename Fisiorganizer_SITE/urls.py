@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.views.static import serve
+from django.conf.urls import handler404
 from Fisiorganizer_SITE.controllers import main_controller, customer_controller, session_controller, account_controller, exercise_controller
 
 
@@ -46,3 +47,5 @@ urlpatterns = [
     url(r'^exercise/',include(exercise_patterns)),
     url(r'^account/',include(authentication_patterns))
 ]
+
+handler404 = 'Fisiorganizer_SITE.controllers.main_controler.pageNotFound'

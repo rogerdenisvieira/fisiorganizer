@@ -24,10 +24,11 @@
 
 <div class="container">
 
-    <h1> Sua agenda para esta {{ dayOfWeek }}:</h1>
+    <h2> Sua agenda para esta {{ dayOfWeek }}:</h2>
 </div>
+<hr>
 
-{% endif %}
+
 
     <table id="customersTable" class="table">
         <thead>
@@ -83,6 +84,8 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% endif %}
 
 
 
