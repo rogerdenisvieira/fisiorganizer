@@ -79,15 +79,41 @@
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>Voltar
     </a>
 
-        <a href="#" id="id_add_session" class="btn btn-primary" role="button">
+        <a href="#" name="add_exercise" class="btn btn-primary" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Adicionar
     </a>
     </div>
 <div class="col-sm-2"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        bootbox.setDefaults({
+            locale: "br"
+        });
+    });
+
+        $('[name="add_exercise"]').click(function(e) {
+            bootbox.prompt({
+                size: "medium",
+                title: "Selecione o exercício",
+                inputType: 'select',
+                inputOptions: [
+                    {
+                        text: "Exercício 01",
+                        value: 5
+                    }
+                ],
+
+                callback: function(result){
+                    console.log(result);
+                    location.reload();
+                    
+                }
+            });
+        });
+            
+</script>
   
 
 
 {% endblock %}
-
-
-

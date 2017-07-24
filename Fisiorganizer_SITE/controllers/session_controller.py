@@ -40,9 +40,6 @@ def details(request, id):
     exercises = SessionExercise.objects.filter(id_session=id)
     exerciseDTO = []
 
-
-    #print('details OK')
-
     sessionDTO = {
         'Instrutor': session.id_instructor.username,
         'Aluno': session.id_customer.name,
@@ -64,6 +61,10 @@ def details(request, id):
 def list(request):
     sessions = Session.objects.all()
     return render(request, 'session/session_list.html', {'sessions': sessions})
+
+
+def add_exercise(request):
+    pass
 
 def delete_exercise(request):
     pass
