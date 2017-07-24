@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from Fisiorganizer_SITE.forms import SessionForm
 from Fisiorganizer_SITE.controllers import session_controller
-from Fisiorganizer_SITE.models import Session
+from Fisiorganizer_SITE.models import Session, SessionExercise
 
 
 @login_required
@@ -36,9 +36,34 @@ def delete(request):
 
 
 def details(request, id):
-    return HttpResponse("ver aula")
+    session = get_object_or_404(Session, id=id)
+    exercises = SessionExercise.objects.filter(id_session=id)
+    exerciseDTO = []
+
+
+    #print('details OK')
+
+    sessionDTO = {
+        'Instrutor': session.id_instructor.username,
+        'Aluno': session.id_customer.name,
+        'Data': session.date,
+        'Hora': session.time
+    }
+
+    for e in exercises:
+        itemsDTO = []
+        itemsDTO.append(e.id)
+        itemsDTO.append(e.id_exercise.name)
+        itemsDTO.append(e.id_exercise.id_level.name)
+        exerciseDTO.append(itemsDTO)
+
+    return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items(),
+    'exerciseDTO': exerciseDTO})
 
 
 def list(request):
     sessions = Session.objects.all()
     return render(request, 'session/session_list.html', {'sessions': sessions})
+
+def delete_exercise(request):
+    pass

@@ -49,11 +49,11 @@
         </tbody>
     </table>
 <hr>
-    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-default" role="button">
+    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-primary" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo aluno
     </a>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
     $('#customersTable').DataTable({
 
@@ -70,10 +70,38 @@
         "ordering": true,
         "info":     true
 
-     }
+        }
 
-    );
-} );
+        );
+    } );
+
+    $(document).ready(function() {
+        bootbox.setDefaults({
+            locale: "br"
+        });
+
+        $('[name="delete"]').click(function(e) {
+            var botaoClicado = $(this);
+            var id = botaoClicado.attr("data-id");
+            bootbox.confirm({
+                size: "small",
+                message: "Deseja realmente excluir?",
+                callback: function(result) {
+
+                    if(result){
+                        $.post("{% url 'customer_delete' %}", 
+                        {
+                            id: id,
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        }, 
+                        function() {
+                            location.reload();
+                        });
+                    }  
+                }
+            });
+        });
+    });
 
 
 </script>

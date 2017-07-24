@@ -10,7 +10,7 @@
 <h1 class="text-center">Todas as aulas</h1>
 
 <hr>
-    <table id="customersTable" class="table">
+    <table id="sessionsTable" class="table">
         <thead>
         <tr>
             <th>Id</th>
@@ -69,14 +69,14 @@
         </tbody>
     </table>
 <hr>
-    <a href="{% url 'session_create' %}" id="id_add_session" class="btn btn-default" role="button">
+    <a href="{% url 'session_create' %}" id="id_add_session" class="btn btn-primary" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Marcar aula
     </a>
 
 
 <script>
     $(document).ready(function() {
-    $('#customersTable').DataTable({
+    $('#sessionsTable').DataTable({
 
     "language": {
             "lengthMenu": "Mostrar _MENU_  registros por página",

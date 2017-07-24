@@ -1,0 +1,93 @@
+
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<h1 class="text-center">Detalhes da sessão</h1>
+
+
+
+<div class="col-sm-2"></div>
+<div class="col-md-8">
+    <hr>
+    <table class="table table-striped">
+
+        <tbody>
+        {% for key, value in sessionDTO %}
+        <tr>
+            <td>
+                {{ key }}
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <hr>
+
+
+    <h3 class="text-center">Exercícios da Sessão</h3>
+        <table class="table table-striped">
+        <thead>
+        <th>Exercício</th>
+        <th>Nível</th>
+        <th>Ações<th>
+        
+        </thead>
+        
+        
+            {% for e in exerciseDTO %}
+        <tbody>
+   
+        <tr>
+            <td>
+                {{ e.1 }}
+            </td>
+            <td>
+                {{ e.2 }}
+            </td>
+
+            <td>
+                <a href="#" class="" role="button">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
+                </a>
+                <span>&nbsp;</span>
+
+
+                <a href="#" class="" role="button">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
+                </a>
+
+                <span>&nbsp;</span>
+
+                <a class="" role="button" name="delete" data-id="#">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    {% endfor %}
+    </table>
+    
+    
+        <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>Voltar
+    </a>
+
+        <a href="#" id="id_add_session" class="btn btn-primary" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Adicionar
+    </a>
+    </div>
+<div class="col-sm-2"></div>
+  
+
+
+{% endblock %}
+
+
+

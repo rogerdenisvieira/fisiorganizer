@@ -29,7 +29,7 @@ def create(request):
     else:
         return render(request, 'customer/customer_create.html', {'customerForm': customer_form})
 
-
+@login_required
 def edit(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -51,11 +51,13 @@ def edit(request, id):
         customer_form = CustomerForm(instance=customer)
         return render(request, 'customer/customer_edit.html', {'customer_form': customer_form, 'customer':customer })
 
-
+@login_required
 def delete(request):
+    customerId = request.POST['id']
+    Customer.objects.filter(id=customerId).delete()
     return HttpResponse("excluir aluno")
 
-
+@login_required
 def details(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -69,7 +71,7 @@ def details(request, id):
 
     return render(request, 'customer/customer_details.html', {'dto': dto.items()})
 
-
+@login_required
 def list(request):
     customers = Customer.objects.all()
     return render(request, 'customer/customer_list.html', {'customers': customers})
