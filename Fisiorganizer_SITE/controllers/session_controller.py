@@ -30,7 +30,7 @@ def create(request):
 def edit(request, id):
     return HttpResponse("editar aula")
 
-
+ 
 def delete(request):
     return HttpResponse("excluir aula")
 
