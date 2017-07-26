@@ -74,7 +74,7 @@ def list(request):
     return render(request, 'session/session_list.html', {'sessions': sessions})
 
 
-def add_exercise(request):
+def add_exercise(request, id_session, id_exercise):
     pass
 
 
