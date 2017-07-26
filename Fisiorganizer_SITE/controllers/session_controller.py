@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from Fisiorganizer_SITE.forms import SessionForm
 from Fisiorganizer_SITE.controllers import session_controller
-from Fisiorganizer_SITE.models import Session, SessionExercise
+from Fisiorganizer_SITE.models import Session, SessionExercise, Exercise
 
 
 @login_required
@@ -37,8 +37,10 @@ def delete(request):
 
 def details(request, id):
     session = get_object_or_404(Session, id=id)
-    exercises = SessionExercise.objects.filter(id_session=id)
-    exerciseDTO = []
+    exercises = Exercise.objects.all()
+    sessionExercises = SessionExercise.objects.filter(id_session=id)
+    exercisesDTO = []
+    sessionExercisesDTO = []
 
     sessionDTO = {
         'Instrutor': session.id_instructor.username,
@@ -47,15 +49,24 @@ def details(request, id):
         'Hora': session.time
     }
 
-    for e in exercises:
-        itemsDTO = []
-        itemsDTO.append(e.id)
-        itemsDTO.append(e.id_exercise.name)
-        itemsDTO.append(e.id_exercise.id_level.name)
-        exerciseDTO.append(itemsDTO)
+    for sessionExercise in sessionExercises:
+        sessionExerciseDTO = {
+            'id': sessionExercise.id,
+            'exercise_name': sessionExercise.id_exercise.name,
+            'level': sessionExercise.id_exercise.id_level.name
+        }
+        sessionExercisesDTO.append(sessionExerciseDTO)
+
+    for exercise in exercises:
+        exerciseDTO = {
+            'id': exercise.id,
+            'content': exercise
+        }
+        exercisesDTO.append(exerciseDTO)
 
     return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items(),
-    'exerciseDTO': exerciseDTO})
+                                                            'sessionExercisesDTO': sessionExercisesDTO,
+                                                            'exercisesDTO': exercisesDTO})
 
 
 def list(request):
@@ -65,6 +76,7 @@ def list(request):
 
 def add_exercise(request):
     pass
+
 
 def delete_exercise(request):
     pass
