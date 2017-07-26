@@ -79,4 +79,5 @@ def add_exercise(request, id_session, id_exercise):
 
 
 def delete_exercise(request):
+    print('passei por aqui')
     pass
