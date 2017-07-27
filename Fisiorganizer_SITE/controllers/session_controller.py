@@ -34,7 +34,7 @@ def edit(request, id):
 def delete(request):
     return HttpResponse("excluir aula")
 
-
+# TODO refactor with snakecase 
 def details(request, id):
     session = get_object_or_404(Session, id=id)
     exercises = Exercise.objects.all()
@@ -46,9 +46,11 @@ def details(request, id):
         'Instrutor': session.id_instructor.username,
         'Aluno': session.id_customer.name,
         'Data': session.date,
-        'Hora': session.time
+        'Hora': session.time,
+        'Id': session.id
     }
 
+    # to list exercises in current session
     for sessionExercise in sessionExercises:
         sessionExerciseDTO = {
             'id': sessionExercise.id,
@@ -57,6 +59,7 @@ def details(request, id):
         }
         sessionExercisesDTO.append(sessionExerciseDTO)
 
+    # to populate dropdown with exercises
     for exercise in exercises:
         exerciseDTO = {
             'id': exercise.id,
@@ -66,7 +69,8 @@ def details(request, id):
 
     return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items(),
                                                             'sessionExercisesDTO': sessionExercisesDTO,
-                                                            'exercisesDTO': exercisesDTO})
+                                                            'exercisesDTO': exercisesDTO,
+                                                            'session_id': id})
 
 
 def list(request):
@@ -74,8 +78,10 @@ def list(request):
     return render(request, 'session/session_list.html', {'sessions': sessions})
 
 
-def add_exercise(request, id_session, id_exercise):
-    pass
+def add_exercise(request, id):
+    print('id da session de retorno' + id)
+    print('id do exercício' + request.POST["id_exercise"])
+    return HttpResponse('OK')
 
 
 def delete_exercise(request):

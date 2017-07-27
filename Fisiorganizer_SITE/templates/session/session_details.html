@@ -7,7 +7,6 @@
 <h1 class="text-center">Detalhes da sessão</h1>
 
 
-
 <div class="col-sm-2"></div>
 <div class="col-md-8">
     <hr>
@@ -40,15 +39,15 @@
         </thead>
         
         
-            {% for e in exerciseDTO %}
+            {% for e in sessionExercisesDTO %}
         <tbody>
    
         <tr>
             <td>
-                {{ e.1 }}
+                {{ e.exercise_name }}
             </td>
             <td>
-                {{ e.2 }}
+                {{ e.level }}
             </td>
 
             <td>
@@ -98,13 +97,21 @@
                 title: "Selecione o exercício",
                 inputType: 'select',
                 inputOptions: [
+                    {% for e in exercisesDTO %}
                     {
-                        text: "Exercício 01",
-                        value: 5
-                    }
+                        text: "{{ e.content}}",
+                        value: {{e.id}}
+                    },
+                    {% endfor %}
                 ],
 
                 callback: function(result){
+
+                    $.post("{% url 'add_session_exercise' id=session_id %}", {
+                        id_exercise: result,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                        });
+
                     console.log(result);
                     location.reload();
                     
