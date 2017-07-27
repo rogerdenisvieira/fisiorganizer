@@ -22,7 +22,8 @@ session_patterns = [
     url(r'^create', session_controller.create, name='session_create'),
     url(r'^details/(?P<id>\d{1,})', session_controller.details, name='session_details'),
     url(r'^list', session_controller.list, name='session_list'),
-    url(r'^(?P<id>\d{1,})/exercise/add', session_controller.add_exercise, name="add_session_exercise")
+    url(r'^(?P<id>\d{1,})/exercise/add', session_controller.add_exercise, name="add_session_exercise"),
+    url(r'^(?P<id>\d{1,})/exercise/delete', session_controller.delete_exercise, name="delete_session_exercise")
 ]
 
 # routes for exercises

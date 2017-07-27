@@ -55,7 +55,7 @@ def edit(request, id):
 def delete(request):
     customerId = request.POST['id']
     Customer.objects.filter(id=customerId).delete()
-    return HttpResponse("excluir aluno")
+    return HttpResponse(status=200)
 
 @login_required
 def details(request, id):

@@ -38,38 +38,39 @@ def delete(request):
 def details(request, id):
     session = get_object_or_404(Session, id=id)
     exercises = Exercise.objects.all()
-    sessionExercises = SessionExercise.objects.filter(id_session=id)
-    exercisesDTO = []
-    sessionExercisesDTO = []
+    session_exercises = SessionExercise.objects.filter(id_session=id)
+    exercises_dto = []
+    session_exercises_dto = []
 
-    sessionDTO = {
+    # information about the session
+    session_dto = {
         'Instrutor': session.id_instructor.username,
         'Aluno': session.id_customer.name,
         'Data': session.date,
         'Hora': session.time,
-        'Id': session.id
     }
 
     # to list exercises in current session
-    for sessionExercise in sessionExercises:
-        sessionExerciseDTO = {
-            'id': sessionExercise.id,
-            'exercise_name': sessionExercise.id_exercise.name,
-            'level': sessionExercise.id_exercise.id_level.name
+    for session_exercise in session_exercises:
+        session_exercise_dto = {
+            'id': session_exercise.id,
+            'exercise_name': session_exercise.id_exercise.name,
+            'level': session_exercise.id_exercise.id_level.name,
+            'id_exercise': session_exercise.id_exercise.id
         }
-        sessionExercisesDTO.append(sessionExerciseDTO)
+        session_exercises_dto.append(session_exercise_dto)
 
     # to populate dropdown with exercises
     for exercise in exercises:
-        exerciseDTO = {
+        exercise_dto = {
             'id': exercise.id,
-            'content': exercise
+            'name': exercise
         }
-        exercisesDTO.append(exerciseDTO)
+        exercises_dto.append(exercise_dto)
 
-    return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items(),
-                                                            'sessionExercisesDTO': sessionExercisesDTO,
-                                                            'exercisesDTO': exercisesDTO,
+    return render(request, 'session/session_details.html', {'session_dto': session_dto.items(),
+                                                            'session_exercises_dto': session_exercises_dto,
+                                                            'exercises_dto': exercises_dto,
                                                             'session_id': id})
 
 
@@ -79,11 +80,18 @@ def list(request):
 
 
 def add_exercise(request, id):
-    print('id da session de retorno' + id)
-    print('id do exercício' + request.POST["id_exercise"])
-    return HttpResponse('OK')
+    id_exercise=request.POST["id_exercise"]
+    session = Session.objects.get(id=id)
+    exercise = Exercise.objects.get(id=id_exercise)
+    session_exercise = SessionExercise(id_session=session, id_exercise=exercise)
+    session_exercise.save()
+    return HttpResponse(status=200)
 
 
-def delete_exercise(request):
-    print('passei por aqui')
-    pass
+def delete_exercise(request,id): 
+    id_exercise = request.POST["id_exercise"]
+    id_session_exercise = request.POST["id_session_exercise"]    
+    SessionExercise.objects.filter(id_exercise=id_exercise, 
+                                   id_session=id, 
+                                   id=id_session_exercise).delete()
+    return HttpResponse(status=200)

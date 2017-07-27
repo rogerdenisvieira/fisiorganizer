@@ -13,7 +13,7 @@
     <table class="table table-striped">
 
         <tbody>
-        {% for key, value in sessionDTO %}
+        {% for key, value in session_dto %}
         <tr>
             <td>
                 {{ key }}
@@ -36,26 +36,21 @@
         <th>Nível</th>
         <th>Ações<th>
         
-        </thead>
-        
-        
-            {% for e in sessionExercisesDTO %}
-        <tbody>
-   
+        </thead>      
+            {% for exercise in session_exercises_dto %}
+        <tbody>  
         <tr>
             <td>
-                {{ e.exercise_name }}
+                {{ exercise.exercise_name }}
             </td>
             <td>
-                {{ e.level }}
+                {{ exercise.level }}
             </td>
-
             <td>
                 <a href="#" class="" role="button">
                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
                 </a>
                 <span>&nbsp;</span>
-
 
                 <a href="#" class="" role="button">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
@@ -63,7 +58,7 @@
 
                 <span>&nbsp;</span>
 
-                <a class="" role="button" name="delete" data-id="#">
+                <a class="" role="button" name="delete" id-exercise="{{ exercise.id_exercise }}" id-session-exercise="{{exercise.id}}">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
                 </a>
             </td>
@@ -71,14 +66,13 @@
 
         </tbody>
     {% endfor %}
-    </table>
+    </table>    
     
-    
-        <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
+    <a href="javascript:history.go(-1)" class="btn btn-default" role="button">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>Voltar
     </a>
 
-        <a href="#" name="add_exercise" class="btn btn-primary" role="button">
+    <a href="#" name="add_exercise" class="btn btn-primary" role="button">
         <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Adicionar
     </a>
     </div>
@@ -97,10 +91,10 @@
                 title: "Selecione o exercício",
                 inputType: 'select',
                 inputOptions: [
-                    {% for e in exercisesDTO %}
+                    {% for exercise in exercises_dto %}
                     {
-                        text: "{{ e.content}}",
-                        value: {{e.id}}
+                        text: "{{ exercise.name}}",
+                        value: {{exercise.id}}
                     },
                     {% endfor %}
                 ],
@@ -112,12 +106,36 @@
                         csrfmiddlewaretoken: "{{ csrf_token }}"
                         });
 
-                    console.log(result);
                     location.reload();
                     
                 }
             });
         });
+
+            $('[name="delete"]').click(function(e) {
+        var botaoClicado = $(this);
+        var id_exercise = botaoClicado.attr("id-exercise");
+        var id_session_exercise = botaoClicado.attr("id-session-exercise");
+        bootbox.confirm({
+            size: "medium",
+            message: "Deseja realmente excluir?",
+            callback: function(result) {
+
+                if(result){
+                    $.post("{% url 'delete_session_exercise' id=session_id %}", 
+                    {
+                        id_exercise: id_exercise,
+                        id_session_exercise: id_session_exercise,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    }, 
+                    function() {
+                        location.reload();
+                    });
+                }  
+            }
+        });
+    });
+
             
 </script>
   

@@ -67,7 +67,6 @@ class SessionExercise(models.Model):
     id = models.AutoField(primary_key=True)
     id_exercise = models.ForeignKey(Exercise)
     id_session = models.ForeignKey(Session)
-    alias = models.CharField(max_length=150, blank=False)
 
 
 class UserExtra(models.Model):
