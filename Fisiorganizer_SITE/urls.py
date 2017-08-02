@@ -41,7 +41,7 @@ authentication_patterns = [
     url(r'^logout', account_controller.logout_user, name='logout_user')
 ]
 
-
+# build all URLs together
 urlpatterns = [
     url(r'^$', main_controller.index, name='index'),
     url(r'^customer/',include(customer_patterns)),
