@@ -10,7 +10,7 @@ def index(request):
     dayOfWeek = date_helper.getDayOfWeek
 
     # if user is authenticated, returns his sessions, else, returns just the page
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         today = datetime.date.today()
         user = request.user
         sessions = Session.objects.filter(date=today, id_instructor=user)
@@ -18,7 +18,23 @@ def index(request):
     else:
         return render(request, 'index.html')
 
-def pageNotFound(request):
+# retrieve named day of the week
+def getDayOfWeek():
+    today = datetime.date.today()
+    days = ["Segunda-feira", 
+            "Terça-feira", 
+            "Quarta-feira", 
+            "Quinta-feira", 
+            "Sexta-feira", 
+            "Sábado", 
+            "Domingo"
+            ]   
+    dayNumber = today.weekday()
+    dayOfWeek = days[dayNumber]
+
+    return dayOfWeek
+
+def pageNotFound(request, exception):
     return render(request, '404.html')
 
 

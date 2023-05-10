@@ -36,7 +36,7 @@ class Level(models.Model):
 
 class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
-    id_level = models.ForeignKey(Level)
+    id_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, blank=False)
     reference = models.CharField(max_length=200, blank=True)
     description = models.TextField(max_length=500, blank=False)
@@ -56,22 +56,22 @@ class Role(models.Model):
     
 class Session(models.Model):
     id = models.AutoField(primary_key=True)
-    id_modality = models.ForeignKey(Modality)
-    id_instructor = models.ForeignKey(User)
-    id_customer = models.ForeignKey(Customer)
+    id_modality = models.ForeignKey(Modality, on_delete=models.CASCADE)
+    id_instructor = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
 
     
 class SessionExercise(models.Model):
     id = models.AutoField(primary_key=True)
-    id_exercise = models.ForeignKey(Exercise)
-    id_session = models.ForeignKey(Session)
+    id_exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    id_session = models.ForeignKey(Session, on_delete=models.CASCADE)
 
 
 class UserExtra(models.Model):
     id = models.AutoField(primary_key=True)
-    id_user = models.ForeignKey(User)
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     attempts = models.PositiveIntegerField(blank=False, null=False, default=0)
 
 
@@ -93,14 +93,14 @@ class Equipment(models.Model):
 
 class ExerciseFocus(models.Model):
     id = models.AutoField(primary_key=True)
-    id_exercise = models.ForeignKey(Exercise)
-    id_focus = models.ForeignKey(Focus)
+    id_exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    id_focus = models.ForeignKey(Focus, on_delete=models.CASCADE)
 
 
 class ExerciseEquipment(models.Model):
     id = models.AutoField(primary_key=True)
-    id_exercise = models.ForeignKey(Exercise)
-    id_equipment = models.ForeignKey(Equipment)
+    id_exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    id_equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
 
     
