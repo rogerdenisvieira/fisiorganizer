@@ -11,7 +11,7 @@ def index(request):
     dayOfWeek = getDayOfWeek()
 
     # if user is authenticated, returns his sessions, else, returns just the page
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         today = datetime.date.today()
         user = request.user
         sessions = Session.objects.filter(date=today, id_instructor=user)
@@ -35,7 +35,7 @@ def getDayOfWeek():
 
     return dayOfWeek
 
-def pageNotFound(request):
+def pageNotFound(request, exception):
     return render(request, '404.html')
 
 
