@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import re_path, include
 from django.views.static import serve
 from django.conf.urls import handler404
-from Fisiorganizer_SITE.controllers import main_controller, customer_controller, session_controller, account_controller, exercise_controller
+from Fisiorganizer_SITE.controllers import main_controller, customer_controller, session_controller, account_controller, exercise_controller, evolution_controller
 
 
 
@@ -13,6 +13,14 @@ customer_patterns = [
     re_path(r'^create', customer_controller.create, name='customer_create'),
     re_path(r'^details/(?P<id>\d{1,})', customer_controller.details, name='customer_details'),
     re_path(r'^list', customer_controller.list, name='customer_list')
+]
+
+evolution_patterns = [
+    re_path(r'create', evolution_controller.create, name="evolution_create"),
+    re_path(r'list', evolution_controller.list, name="evolution_list"),
+    re_path(r'^edit/(?P<id>\d{1,})', evolution_controller.edit, name='evolution_edit'),
+    re_path(r'delete', evolution_controller.delete, name="evolution_delete"),
+    re_path(r'^details/(?P<id>\d{1,})', evolution_controller.details, name='evolution_details')
 ]
 
 # routes for sessions
@@ -47,7 +55,8 @@ urlpatterns = [
     re_path(r'^customer/',include(customer_patterns)),
     re_path(r'^session/',include(session_patterns)),
     re_path(r'^exercise/',include(exercise_patterns)),
-    re_path(r'^account/',include(authentication_patterns))
+    re_path(r'^account/',include(authentication_patterns)),
+    re_path(r'^evolution/',include(evolution_patterns))
 ]
 
 handler404 = 'Fisiorganizer_SITE.controllers.main_controller.pageNotFound'

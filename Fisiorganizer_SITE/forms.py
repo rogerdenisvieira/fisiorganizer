@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ModelChoiceField, DateField
-from Fisiorganizer_SITE.models import Customer, Session, Exercise
+from Fisiorganizer_SITE.models import Customer, Session, Exercise, Evolution
 import datetime
 
 
@@ -62,5 +62,10 @@ class SessionForm(ModelForm):
 class ExerciseForm(ModelForm):
     class Meta:
         model = Exercise
+        fields = "__all__"
+
+class EvolutionForm(ModelForm):
+    class Meta:
+        model = Evolution
         fields = "__all__"
 

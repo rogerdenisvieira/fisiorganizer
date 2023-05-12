@@ -102,6 +102,12 @@ class ExerciseEquipment(models.Model):
     id_exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     id_equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
+class Evolution(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    date = models.DateField()
+    evolution_text = models.TextField(max_length=500, blank=False)
+    
 
     
 
