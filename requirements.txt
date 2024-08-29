@@ -1,3 +1,48 @@
-Django==1.10.6
-django-widget-tweaks==1.4.1
-djangorestframework==3.6.3
+amqp==5.1.1
+annotated-types==0.5.0
+asgiref==3.8.1
+billiard==4.1.0
+blinker==1.6.3
+celery==5.3.4
+click==8.1.7
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.3.0
+config==0.5.1
+Django==5.1
+django-mssql==1.8
+django-sqlserver==1.11
+django-widget-tweaks==1.5.0
+djangorestframework==3.15.2
+Faker==19.3.0
+Flask==3.0.0
+inflect==7.0.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+kombu==5.3.2
+MarkupSafe==2.1.3
+mpmath @ file:///private/tmp/python-mpmath-20231112-5361-l6cha0/mpmath-1.3.0
+mssql-django==1.3
+networkx @ file:///private/tmp/python-networkx-20231112-5620-1n6waxd/networkx-3.2.1/dist/networkx-3.2.1-py3-none-any.whl#sha256=9d72450cd74f1e630af85739ac9967362e2a7ebe03d3164ce3af0659ab910890
+numpy @ file:///private/tmp/numpy-20240206-5894-1wazl8/numpy-1.26.4
+pandas==2.2.2
+prompt-toolkit==3.0.39
+pydantic==2.1.1
+pydantic_core==2.4.0
+pygame==2.5.2
+pyodbc==4.0.39
+python-dateutil==2.8.2
+python-tds==1.13.0
+pytz==2023.3
+PyYAML @ file:///private/tmp/pyyaml-20231018-5610-1rdh755/PyYAML-6.0.1
+six==1.16.0
+sqlacodegen==2.3.0.post1
+SQLAlchemy==1.4.49
+sqlautocode==0.7
+sqlparse==0.4.4
+sympy @ file:///private/tmp/python-sympy-20231112-5287-1md1jyz/sympy-1.12
+typing_extensions @ file:///private/tmp/python-typing-extensions-20231008-5501-1ralzsu/typing_extensions-4.8.0
+tzdata==2023.3
+vine==5.0.0
+wcwidth==0.2.8
+Werkzeug==3.0.0
