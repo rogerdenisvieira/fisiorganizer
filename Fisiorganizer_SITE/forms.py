@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ModelChoiceField, DateField
-from Fisiorganizer_SITE.models import Customer, Session, Exercise
+from Fisiorganizer_SITE.models import Customer, Evolution, Session
 import datetime
 
 
@@ -58,9 +58,22 @@ class SessionForm(ModelForm):
             'time': 'Hora'
         }
 
-
-class ExerciseForm(ModelForm):
+class EvolutionForm(ModelForm):
     class Meta:
-        model = Exercise
+        model = Evolution
         fields = "__all__"
+        widgets = {
+            'date': DateInput(),
+            'time': TimeInput()
+        }
+
+        labels = {
+            'id_instructor': 'Profissional',
+            'id_customer': 'Aluno',
+            'id_modality': 'Modalidade',
+            'id_place': 'Local',
+            'description': 'Descrição',
+            'date': 'Data',
+            'time': 'Hora'
+        }
 

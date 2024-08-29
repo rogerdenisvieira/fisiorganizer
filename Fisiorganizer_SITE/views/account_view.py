@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from Fisiorganizer_SITE.controllers import main_controller, account_controller
+from Fisiorganizer_SITE.views import account_view, main_view
 from Fisiorganizer_SITE.models import UserExtra
 from Fisiorganizer_SITE.forms import LoginForm
 
@@ -35,7 +35,7 @@ def login_user(request):
                     if user.is_active:
                         login(request, user)
                         messages.success(request, 'Seja bem-vindo ' + user.username, extra_tags='alert-success')
-                        return redirect(main_controller.index)
+                        return redirect(main_view.index)
                     else:
                         message = 'Usuário inativo.'
                 else:
@@ -49,7 +49,7 @@ def login_user(request):
 
         # retrieve login page with messages
         messages.warning(request, message, extra_tags='alert-warning')
-        return redirect(account_controller.login_user)
+        return redirect(account_view.login_user)
     else:
         form = LoginForm
         return render(request, 'login.html', {'LoginForm': form})
@@ -58,4 +58,4 @@ def login_user(request):
 def logout_user(request):
     messages.success(request, 'Logout realizado com sucesso.', extra_tags='alert-success')
     logout(request)
-    return redirect(main_controller.index)
+    return redirect(main_view.index)

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from Fisiorganizer_SITE.forms import CustomerForm
 from Fisiorganizer_SITE.models import Customer
-from Fisiorganizer_SITE.controllers import customer_controller
+from Fisiorganizer_SITE.views import customer_view
 
 
 @login_required
@@ -23,7 +23,7 @@ def create(request):
             customer.save()
 
             print('object saved')
-            return redirect(customer_controller.list)
+            return redirect(customer_view.list)
         else:
             print(form.errors)
     else:
@@ -46,7 +46,7 @@ def edit(request, id):
             customer.details = request.POST['details']
             customer.save()
 
-            return redirect(customer_controller.list)
+            return redirect(customer_view.list)
     else:
         customer_form = CustomerForm(instance=customer)
         return render(request, 'customer/customer_edit.html', {'customer_form': customer_form, 'customer':customer })

@@ -45,18 +45,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'session_create' %}">Marcar </a></li>
                         <li><a href="{% url 'session_list' %}">Ver</a></li>
-
-                    </ul>
-                </li>
-
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Alunos <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'customer_create' %}">Adicionar</a></li>
-                        <li><a href="{% url 'customer_list' %}">Ver</a></li>
-
                     </ul>
                 </li>
 
@@ -65,11 +53,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Cadastros <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Exercícios</a></li>
-                        <li><a href="#">Níveis</a></li>
-                        <li><a href="#">Equipamentos</a></li>
-                        <li><a href="#">Focos</a></li>
-                        <li><a href="#">Ver</a></li>
+                        <li><a href="#">Locais</a></li>
+                        <li><a href="#">Evoluções</a></li>
+                        <li><a href="{% url 'customer_list' %}">Alunos</a></li>
+                        <li><a href="#">Profissionais</a></li>
+                        
                     </ul>
                 </li>
             </ul>
@@ -112,7 +100,7 @@
 <br>
 <br>
 <footer>
-    <p class="text-center text-muted">© Copyright 2017 OmniLabs Company. Todos os direitos reservados.</p>    
+    <p class="text-center text-muted">© Copyright 2024 OmniLabs Company. Todos os direitos reservados.</p>    
 </footer>
 
 </body>

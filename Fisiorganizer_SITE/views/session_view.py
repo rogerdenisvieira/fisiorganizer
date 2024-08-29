@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from Fisiorganizer_SITE.forms import SessionForm
-from Fisiorganizer_SITE.controllers import session_controller
-from Fisiorganizer_SITE.models import Session, SessionExercise, Exercise
+from Fisiorganizer_SITE.views import session_view
+from Fisiorganizer_SITE.models import Session
 
 
 @login_required
@@ -19,7 +19,7 @@ def create(request):
             session.save()
 
             print('saving session into db')
-            return redirect(session_controller.list)
+            return redirect(session_view.list)
         else:
             print(session_form.errors)
     else:
@@ -38,9 +38,7 @@ def delete(request):
 def details(request, id):
     session = get_object_or_404(Session, id=id)
     exercises = Exercise.objects.all()
-    sessionExercises = SessionExercise.objects.filter(id_session=id)
-    exercisesDTO = []
-    sessionExercisesDTO = []
+
 
     sessionDTO = {
         'Instrutor': session.id_instructor.username,
@@ -49,34 +47,9 @@ def details(request, id):
         'Hora': session.time
     }
 
-    for sessionExercise in sessionExercises:
-        sessionExerciseDTO = {
-            'id': sessionExercise.id,
-            'exercise_name': sessionExercise.id_exercise.name,
-            'level': sessionExercise.id_exercise.id_level.name
-        }
-        sessionExercisesDTO.append(sessionExerciseDTO)
-
-    for exercise in exercises:
-        exerciseDTO = {
-            'id': exercise.id,
-            'content': exercise
-        }
-        exercisesDTO.append(exerciseDTO)
-
-    return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items(),
-                                                            'sessionExercisesDTO': sessionExercisesDTO,
-                                                            'exercisesDTO': exercisesDTO})
+    return render(request, 'session/session_details.html', {'sessionDTO': sessionDTO.items()})
 
 
 def list(request):
     sessions = Session.objects.all()
     return render(request, 'session/session_list.html', {'sessions': sessions})
-
-
-def add_exercise(request):
-    pass
-
-
-def delete_exercise(request):
-    pass

@@ -2,7 +2,7 @@
 
 - Django
 - django-widget-tweaks
-- jangorestframework
+- djangorestframework
 
 #### Restoring dependencies
 
