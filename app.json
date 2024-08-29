@@ -1,7 +1,0 @@
-{
-  "name": "Fisiorganizer",
-  "description": "Gerenciador de agendamentos para clínicas.",
-  "image": "heroku/python",
-  "repository": "https://github.com/rogervieira/Fisiorganizer.git",
-  "keywords": ["python", "django" ]
-}
