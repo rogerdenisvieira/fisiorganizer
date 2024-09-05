@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ModelChoiceField, DateField
-from Fisiorganizer_SITE.models import Customer, Evolution, Session
+from Fisiorganizer_SITE.models import Patient, Evolution, Place, Session
 import datetime
 
 
@@ -25,9 +25,9 @@ class LoginForm(ModelForm):
         }
 
 
-class CustomerForm(ModelForm):
+class PatientForm(ModelForm):
     class Meta:
-        model = Customer
+        model = Patient
         fields = "__all__"
 
         labels = {
@@ -51,9 +51,9 @@ class SessionForm(ModelForm):
         }
 
         labels = {
-            'id_instructor': 'Profissional',
-            'id_customer': 'Aluno',
-            'id_modality': 'Modalidade',
+            'instructor': 'Profissional',
+            'customer': 'Aluno',
+            'modality': 'Modalidade',
             'date': 'Data',
             'time': 'Hora'
         }
@@ -68,12 +68,24 @@ class EvolutionForm(ModelForm):
         }
 
         labels = {
-            'id_instructor': 'Profissional',
-            'id_customer': 'Aluno',
-            'id_modality': 'Modalidade',
-            'id_place': 'Local',
-            'description': 'Descrição',
+            'instructor': 'Profissional',
+            'customer': 'Paciente',
+            'modality': 'Modalidade',
+            'place': 'Local',
+            'description_before': 'Condição Inicial',
+            'description_after': 'Condição Final',
             'date': 'Data',
             'time': 'Hora'
+        }
+class PlaceForm(ModelForm):
+    class Meta:
+        model = Place
+        fields = "__all__"
+        labels = {
+            'name': 'Nome',
+            'address': 'Endereço',
+            'city': 'Cidade',
+            'phone': 'Telefone',
+            'details': 'Detalhes'
         }
 

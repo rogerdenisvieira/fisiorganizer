@@ -2,14 +2,14 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
 from rest_framework.response import Response
-from Fisiorganizer_SITE.models import Customer
+from Fisiorganizer_SITE.models import Patient
 from Fisiorganizer_API.serializers import CustomerSerializer
 
 
 
 @api_view(['GET'])
 def get_customer_by_id(request, id):
-    customers = Customer.objects.filter(id=id)
+    customers = Patient.objects.filter(id=id)
     serializer = CustomerSerializer(customers, many=True)
     print(id)
     return Response(serializer.data)
@@ -17,7 +17,7 @@ def get_customer_by_id(request, id):
 
 @api_view(['GET'])
 def get_all_customers(request):
-    customers = Customer.objects.all()
+    customers = Patient.objects.all()
     serializer = CustomerSerializer(customers, many=True)
     return Response(serializer.data)
 

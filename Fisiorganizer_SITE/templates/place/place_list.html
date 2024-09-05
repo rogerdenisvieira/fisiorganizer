@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+
+<h1 class="text-center">Locais</h1>
+
+<hr>
+    <table id="customersTable" class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for place in object_list %}
+        <tr>
+            <td>
+                {{ place.id }}
+            </td>
+
+
+            <td>
+                {{place.name}}
+            </td>
+            <td>
+                <a href="{% url 'place_detail' pk=place.id %}" class="" role="button">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
+                </a>
+                <span>&nbsp;</span>
+
+
+                <a href="#" class="" role="button">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
+                </a>
+
+                <span>&nbsp;</span>
+
+                <a class="#" role="button" name="delete" data-id="{% url 'place_delete' pk=place.id %}">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<hr>
+<a href="{% url 'place_create' %}" id="id_add_place" class="btn btn-primary" role="button">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo local
+</a>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#customersTable').DataTable({
+
+    "language": {
+            "lengthMenu": "Mostrar _MENU_  registros por página",
+            "zeroRecords": "Nada foi encontrado :(",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro",
+            "infoFiltered": "(Filtrado de _MAX_ registros totais)",
+            "search": "Pesquisar"
+
+    },
+        "paging":   true,
+        "ordering": true,
+        "info":     true
+
+        }
+
+        );
+    } );
+
+    $(document).ready(function() {
+        bootbox.setDefaults({
+            locale: "br"
+        });
+
+        $('[name="delete"]').click(function(e) {
+            var botaoClicado = $(this);
+            var url = botaoClicado.attr("data-id");
+            bootbox.confirm({
+                size: "small",
+                message: "Deseja realmente excluir?",
+                callback: function(result) {
+
+                    if(result){
+                        $.post(url, 
+                        {
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        }, 
+                        function() {
+                            location.reload();
+                        });
+                    }  
+                }
+            });
+        });
+    });
+
+
+</script>
+
+
+{% endblock %}

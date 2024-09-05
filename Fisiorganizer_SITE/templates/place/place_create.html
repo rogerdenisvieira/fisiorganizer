@@ -3,21 +3,25 @@
 {% load static %}
 {% block content %}
 
-    <h1 class="text-center">Nova Sessão</h1>
-
+    <h1 class="text-center">Novo Local</h1>
 
 <div class="col-sm-2"></div>
 
 <div class="col-md-8">
-    <hr>
-    <form class="form-group" action="{% url 'session_create' %}" method="post" enctype="multipart/form-data">
+    
+<hr>    
+    <form class="form-group" action="{% url 'place_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        
         {% for field in form %}
+        
         <label>{{field.label}}</label>
         <p>{{field|add_class:"form-control"}}</p>
+        
         {% endfor %}
-<hr>
 
+        <hr>
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true">&nbsp;</span>Salvar
         </button>
@@ -26,11 +30,9 @@
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Cancelar
         </a>
     </form>
-
     </div>
 
-    <div class="col-sm-2"></div>
+<div class="col-sm-2"></div>
 
 
-{% endblock %}`
-
+{% endblock %}

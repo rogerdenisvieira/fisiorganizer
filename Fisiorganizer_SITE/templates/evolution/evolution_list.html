@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+
+<h1 class="text-center">Evoluções</h1>
+
+<hr>
+<table id="customersTable" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Paciente</th>
+            <th>Profissional</th>
+            <th>Local</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for evolution in object_list %}
+        <tr>
+            <td>
+                {{ evolution.id }}
+            </td>
+
+            <td>
+                {{ evolution.date }}
+            </td>
+
+            <td>
+                {{ evolution.patient.name }} {{ evolution.patient.surname }}
+            </td>
+
+            <td>
+                {{evolution.instructor.first_name}} {{evolution.instructor.last_name}}
+            </td>
+
+            <td>
+                {{ evolution.place.name }}
+            </td>
+
+
+
+
+            <td>
+                <a href="{% url 'evolution_detail' pk=evolution.id %}" class="" role="button">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
+                </a>
+                <span>&nbsp;</span>
+
+
+                <a href="{% url 'evolution_edit' pk=evolution.id %}" class="" role="button">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
+                </a>
+
+                <span>&nbsp;</span>
+
+                <a class="" role="button" name="delete" data-id="{{ evolution.id }}">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<a href="{% url 'patient_create' %}" id="id_add_patient" class="btn btn-primary" role="button">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo paciente
+</a>
+
+<a href="{% url 'evolution_create' %}" id="id_add_evolution" class="btn btn-primary" role="button">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Evoluir paciente
+</a>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#customersTable').DataTable({
+
+            "language": {
+                "lengthMenu": "Mostrar _MENU_  registros por página",
+                "zeroRecords": "Nada foi encontrado :(",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro",
+                "infoFiltered": "(Filtrado de _MAX_ registros totais)",
+                "search": "Pesquisar"
+
+            },
+            "paging": true,
+            "ordering": true,
+            "info": true
+
+        }
+
+        );
+    });
+
+    $(document).ready(function () {
+        bootbox.setDefaults({
+            locale: "br"
+        });
+
+        $('[name="delete"]').click(function (e) {
+            var botaoClicado = $(this);
+            var id = botaoClicado.attr("data-id");
+            bootbox.confirm({
+                size: "small",
+                message: "Deseja realmente excluir?",
+                callback: function (result) {
+
+                    if (result) {
+                        $.post("",
+                            {
+                                id: id,
+                                csrfmiddlewaretoken: "{{ csrf_token }}"
+                            },
+                            function () {
+                                location.reload();
+                            });
+                    }
+                }
+            });
+        });
+    });
+
+
+</script>
+
+
+{% endblock %}

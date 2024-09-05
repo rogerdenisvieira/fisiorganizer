@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<h1 class="text-center">Todos os alunos</h1>
+<h1 class="text-center">Pacientes</h1>
 
 <hr>
     <table id="customersTable" class="table">
@@ -17,30 +17,30 @@
         </thead>
 
         <tbody>
-        {% for c in customers %}
+        {% for patient in object_list %}
         <tr>
             <td>
-                {{ c.id }}
+                {{ patient.id }}
             </td>
 
 
             <td>
-                {{c.name}} {{c.surname}}
+                {{patient.name}} {{patient.surname}}
             </td>
             <td>
-                <a href="{% url 'customer_details' id=c.id %}" class="" role="button">
+                <a href="{% url 'patient_detail' pk=patient.id %}" class="" role="button">
                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
                 </a>
                 <span>&nbsp;</span>
 
 
-                <a href="{% url 'customer_edit' id=c.id %}" class="" role="button">
+                <a href="{% url 'patient_edit' pk=patient.id %}" class="" role="button">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
                 </a>
 
                 <span>&nbsp;</span>
 
-                <a class="" role="button" name="delete" data-id="{{ c.id }}">
+                <a class="" role="button" name="delete" data-id="{{ patient.id }}">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
                 </a>
             </td>
@@ -49,8 +49,12 @@
         </tbody>
     </table>
 <hr>
-    <a href="{% url 'customer_create' %}" id="id_add_customer" class="btn btn-primary" role="button">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo aluno
+    <a href="{% url 'patient_create' %}" id="id_add_customer" class="btn btn-primary" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Novo paciente
+    </a>
+
+    <a href="{% url 'evolution_create' %}" id="id_add_evolution" class="btn btn-primary" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>Evoluir paciente
     </a>
 
 <script type="text/javascript">
@@ -89,7 +93,7 @@
                 callback: function(result) {
 
                     if(result){
-                        $.post("{% url 'customer_delete' %}", 
+                        $.post("", 
                         {
                             id: id,
                             csrfmiddlewaretoken: "{{ csrf_token }}"

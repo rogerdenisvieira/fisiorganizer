@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<h1 class="text-center">Detalhes do Paciente</h1>
+
+<div class="col-sm-2"></div>
+<div class="col-md-8">
+    <hr>
+    <table class="table table-striped">
+
+
+
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Nome</strong>
+                </td>
+
+                <td>
+                    {{ object.name }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Endereço</strong>
+                </td>
+
+                <td>
+                    {{ object.address }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Cidade</strong>
+                </td>
+
+                <td>
+                    {{ object.city }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Nascimento</strong>
+                </td>
+
+                <td>
+                    {{ object.born_date }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Telefone</strong>
+                </td>
+
+                <td>
+                    {{ object.cellphone }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Detalhes</strong>
+                </td>
+
+                <td>
+                    {{ object.details }}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <h3 class="text-center">Histórico de Evoluções</h3>
+
+
+    <table id="customersTable" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Local</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for evolution in object.evolution_set.all %}
+            <tr>
+                <td>
+                    {{ evolution.id }}
+                </td>
+
+                <td>
+                    {{ evolution.date }}
+                </td>
+
+                <td>
+                    {{ evolution.place }}
+                </td>
+                <td>
+                    <a href="{% url 'evolution_detail' pk=evolution.id %}" class="" role="button">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;</span>Detalhes
+                    </a>
+                    <span>&nbsp;</span>
+
+
+                    <a href="#" class="" role="button">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;</span>Editar
+                    </a>
+
+                    <span>&nbsp;</span>
+
+                    <a class="" role="button" name="delete" data-id="{{ evolution.id }}">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+<div class="col-sm-2"></div>
+
+
+
+{% endblock %}

@@ -3,20 +3,25 @@
 {% load static %}
 {% block content %}
 
-<h1 class="text-center">Edição de aluno</h1>
+    <h1 class="text-center">Novo Paciente</h1>
 
 <div class="col-sm-2"></div>
+
 <div class="col-md-8">
-<hr>
-    <form class="form-group" action="{% url 'customer_edit' id=customer.id %}" method="post" enctype="multipart/form-data">
+    
+<hr>    
+    <form class="form-group" action="{% url 'patient_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-
-        {% for field in customer_form %}
+        
+        {% for field in form %}
+        
         <label>{{field.label}}</label>
         <p>{{field|add_class:"form-control"}}</p>
+        
         {% endfor %}
-<hr>
+
+        <hr>
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true">&nbsp;</span>Salvar
         </button>
@@ -26,9 +31,8 @@
         </a>
     </form>
     </div>
+
 <div class="col-sm-2"></div>
 
 
-
 {% endblock %}
-

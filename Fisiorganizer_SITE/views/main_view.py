@@ -14,7 +14,7 @@ def index(request):
     if request.user.is_authenticated:
         today = datetime.date.today()
         user = request.user
-        sessions = Session.objects.filter(date=today, id_instructor=user)
+        sessions = Session.objects.filter(date=today, instructor=user)
         return render(request, 'index.html', {'dayOfWeek': dayOfWeek, 'sessions': sessions})
     else:
         return render(request, 'index.html')

@@ -1,35 +1,24 @@
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.views.generic import CreateView, DetailView, ListView, UpdateView   
 from Fisiorganizer_SITE.forms import EvolutionForm
+from Fisiorganizer_SITE.models import Evolution
 
 
-@login_required
-def create(request):
-    if request.method == 'POST':
-        session_form = EvolutionForm(request.POST)
-        if session_form.is_valid():
+class EvolutionCreateView(CreateView):
+    model = Evolution
+    form_class = EvolutionForm
+    template_name = 'evolution/evolution_create.html'
+    success_url = '/'
 
-            print('saving session into db')
-            return redirect(evolution_view.list)
-        else:
-            print(session_form.errors)
-    else:
-        EvolutionForm = EvolutionForm()
-        return render(request, 'evolution/evolution_create.html', {'evolutionForm': evolution_form})
+class EvolutionDetailView(DetailView):
+    model = Evolution
+    template_name = 'evolution/evolution_detail.html'
+    
+class EvolutionListView(ListView):
+    model = Evolution
+    template_name = 'evolution/evolution_list.html'
 
-def edit(request, id):
-    return HttpResponse("editar aula")
-
-
-def delete(request):
-    return HttpResponse("excluir aula")
-
-
-def details(request, id):
-    pass
-
-
-def list(request):
-    pass
+class EvolutionUpdateView(UpdateView):
+    model = Evolution
+    form_class = EvolutionForm
+  
