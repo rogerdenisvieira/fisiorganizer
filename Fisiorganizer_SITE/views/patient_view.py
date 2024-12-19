@@ -7,7 +7,7 @@ class PatientCreateView(CreateView):
     model = Patient
     form_class = PatientForm
     template_name = 'patient/patient_create.html'
-    success_url = '/'
+    success_url = '/patient/list/'
 
 class PatientDetailView(DetailView):
     model = Patient
@@ -20,10 +20,10 @@ class PatientListView(ListView):
 class PatientUpdateView(UpdateView):
     model = Patient
     form_class = PatientForm
-    template_name = 'patient/patient_update.html'
-    success_url = '/'
+    template_name = 'patient/patient_edit.html'
+    success_url = '/patient/list/'
 
 class PatientDeleteView(DeleteView):
     model = Patient
     template_name = 'patient/patient_delete.html'
-    success_url = '/'
+    success_url = '/patient/list/'

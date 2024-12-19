@@ -1,6 +1,6 @@
 from Fisiorganizer_SITE.forms import PlaceForm
 from Fisiorganizer_SITE.models import Place
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 
 class PlaceCreateView(CreateView):
@@ -20,4 +20,10 @@ class PlaceListView(ListView):
 class PlaceDeleteView(DeleteView):
     model = Place
     template_name = 'place/place_delete.html'
+    success_url = '/place/list/'
+
+class PlaceEditView(UpdateView):
+    model = Place
+    form_class = PlaceForm
+    template_name = 'place/place_edit.html'
     success_url = '/place/list/'

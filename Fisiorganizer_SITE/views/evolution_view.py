@@ -8,7 +8,7 @@ class EvolutionCreateView(CreateView):
     model = Evolution
     form_class = EvolutionForm
     template_name = 'evolution/evolution_create.html'
-    success_url = '/'
+    success_url = '/evolution/list/'
 
 class EvolutionDetailView(DetailView):
     model = Evolution
@@ -21,4 +21,11 @@ class EvolutionListView(ListView):
 class EvolutionUpdateView(UpdateView):
     model = Evolution
     form_class = EvolutionForm
+    template_name = 'evolution/evolution_edit.html'
+    success_url = '/evolution/list/'
+
+class EvolutionDeleteView(DetailView):
+    model = Evolution
+    template_name = 'evolution/evolution_delete.html'
+    success_url = '/evolution/list/'
   

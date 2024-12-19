@@ -39,8 +39,7 @@
                 </a>
 
                 <span>&nbsp;</span>
-
-                <a class="" role="button" name="delete" data-id="{{ patient.id }}">
+                <a class="#" role="button" name="delete" data-id="{% url 'patient_delete' pk=patient.id %}">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
                 </a>
             </td>
@@ -86,16 +85,15 @@
 
         $('[name="delete"]').click(function(e) {
             var botaoClicado = $(this);
-            var id = botaoClicado.attr("data-id");
+            var url = botaoClicado.attr("data-id");
             bootbox.confirm({
                 size: "small",
                 message: "Deseja realmente excluir?",
                 callback: function(result) {
 
                     if(result){
-                        $.post("", 
+                        $.post(url, 
                         {
-                            id: id,
                             csrfmiddlewaretoken: "{{ csrf_token }}"
                         }, 
                         function() {

@@ -58,9 +58,8 @@
 
                 <span>&nbsp;</span>
 
-                <a class="" role="button" name="delete" data-id="{{ evolution.id }}">
+                <a class="#" role="button" name="delete" data-id="{% url 'evolution_delete' pk=evolution.id %}">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">&nbsp;</span>Excluir
-                </a>
             </td>
         </tr>
         {% endfor %}
@@ -97,29 +96,28 @@
         );
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         bootbox.setDefaults({
             locale: "br"
         });
 
-        $('[name="delete"]').click(function (e) {
+        $('[name="delete"]').click(function(e) {
             var botaoClicado = $(this);
-            var id = botaoClicado.attr("data-id");
+            var url = botaoClicado.attr("data-id");
             bootbox.confirm({
                 size: "small",
                 message: "Deseja realmente excluir?",
-                callback: function (result) {
+                callback: function(result) {
 
-                    if (result) {
-                        $.post("",
-                            {
-                                id: id,
-                                csrfmiddlewaretoken: "{{ csrf_token }}"
-                            },
-                            function () {
-                                location.reload();
-                            });
-                    }
+                    if(result){
+                        $.post(url, 
+                        {
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        }, 
+                        function() {
+                            location.reload();
+                        });
+                    }  
                 }
             });
         });

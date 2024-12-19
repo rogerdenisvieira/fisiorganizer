@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import ModelForm, ModelChoiceField, DateField
+from django.forms import ModelForm, ModelChoiceField, DateField, ValidationError
 from Fisiorganizer_SITE.models import Patient, Evolution, Place, Session
 import datetime
+
+from Fisiorganizer_SITE.validators import validate_phone
 
 
 class DateInput(forms.DateInput):
@@ -36,8 +38,12 @@ class PatientForm(ModelForm):
             'city' : 'Cidade',
             'phone' : 'Telefone',
             'cellphone':'Celular',
-            'age':'Idade',
+            'birthday':'Data de Nascimento',
             'details':'Detalhes'
+        }
+
+        widgets = {
+            'birthday': DateInput()
         }
 
 
@@ -77,6 +83,7 @@ class EvolutionForm(ModelForm):
             'date': 'Data',
             'time': 'Hora'
         }
+
 class PlaceForm(ModelForm):
     class Meta:
         model = Place
@@ -89,3 +96,8 @@ class PlaceForm(ModelForm):
             'details': 'Detalhes'
         }
 
+    # def clean_phone(self):
+    #     phone = self.cleaned_data.get('phone')
+        
+    #     if validate_phone(phone):
+    #         raise ValidationError(f'{phone} não é um número de telefone válido')

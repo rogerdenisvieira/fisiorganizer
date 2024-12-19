@@ -3,17 +3,16 @@ from django.contrib.auth.models import User
 from Fisiorganizer_SITE.validators import validate_phone
 
 
-# Models .
-
 class Patient(models.Model):
     id = models.AutoField(primary_key=True)
     # id_state = models.ForeignKey(State, default='1')
     name = models.CharField(max_length=100, blank=False, default='')
     address = models.CharField(max_length=150, blank=True)
     city = models.CharField(max_length=25)
-    cellphone = models.PositiveIntegerField(blank=False, null=False)
+    cellphone = models.CharField(blank=False, null=False, validators=[validate_phone], max_length=13)
+    birthday = models.DateField(blank=False, default='1900-01-01')
     details = models.TextField(max_length=500, blank=True)
-    born_date = models.DateField(blank=False, default='1900-01-01')
+
 
     def __str__(self):
         return self.name
@@ -27,9 +26,10 @@ class Modality(models.Model):
         return self.name
 
 
-class Level(models.Model):
+class Service(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=150, blank=False)
+    description = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         return str(self.id) + ' - ' + self.name   
@@ -48,8 +48,9 @@ class Session(models.Model):
     modality = models.ForeignKey(Modality, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
+    Service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    date = models.DateField(blank=False)
+    time = models.TimeField(blank=False)
 
 class UserExtra(models.Model):
     id = models.AutoField(primary_key=True)
@@ -72,7 +73,7 @@ class Evolution(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField(blank=False)
     time = models.TimeField()
     description_before = models.TextField(max_length=500, blank=False)
     description_after = models.TextField(max_length=500, blank=False)

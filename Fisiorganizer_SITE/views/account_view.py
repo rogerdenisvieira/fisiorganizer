@@ -10,49 +10,39 @@ from Fisiorganizer_SITE.forms import LoginForm
 
 
 def login_user(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
-        # check if request user exists
-        if User.objects.filter(username=username).exists():
+        user = User.objects.filter(username=username).first()
+        if not user:
+            messages.warning(request, 'Usuário inválido', extra_tags='alert-warning')
+            return redirect(account_view.login_user)
 
-            # store user who is trying to authenticate
-            user_to_lock = User.objects.get(username=request.POST['username'])
+        user_to_lock = User.objects.get(username=username)
+        extra = UserExtra.objects.get(user_id=user_to_lock)
 
-            # return user's extra informations
-            extra = UserExtra.objects.get(id_user=user_to_lock)
+        if extra.attempts >= getattr(settings, "TENTATIVAS_LOGIN", None):
+            messages.warning(request, 'Seu usuário foi bloqueado. Entre em contato com o administrador.', extra_tags='alert-warning')
+            return redirect(account_view.login_user)
 
-            # check if attemps to login are less than config file
-            if extra.attempts < getattr(settings, "TENTATIVAS_LOGIN", None):
+        user = authenticate(username=username, password=password)
+        if user is None:
+            extra.attempts += 1
+            extra.save()
+            messages.warning(request, 'Falha na autenticação.', extra_tags='alert-warning')
+            return redirect(account_view.login_user)
 
-                # try to authenticate
-                user = authenticate(username=username, password=password)
+        if not user.is_active:
+            messages.warning(request, 'Usuário inativo.', extra_tags='alert-warning')
+            return redirect(account_view.login_user)
 
-                # if user was authenticated
-                if user is not None:
-                    # if user is active
-                    if user.is_active:
-                        login(request, user)
-                        messages.success(request, 'Seja bem-vindo ' + user.username, extra_tags='alert-success')
-                        return redirect(main_view.index)
-                    else:
-                        message = 'Usuário inativo.'
-                else:
-                    message = 'Falha na autenticação.'
-                    extra.attempts += 1
-                    extra.save()
-            else:
-                message = 'Seu usuário foi bloqueado. Entre em contato com o administrador.'
-        else:
-            message = 'Usuário inválido'
+        login(request, user)
+        messages.success(request, f'Seja bem-vindo {user.username}', extra_tags='alert-success')
+        return redirect(main_view.index)
 
-        # retrieve login page with messages
-        messages.warning(request, message, extra_tags='alert-warning')
-        return redirect(account_view.login_user)
-    else:
-        form = LoginForm
-        return render(request, 'login.html', {'LoginForm': form})
+    form = LoginForm()
+    return render(request, 'login.html', {'LoginForm': form})
 
 # logs out user
 def logout_user(request):
