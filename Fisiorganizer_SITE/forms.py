@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ModelChoiceField, DateField
-from Fisiorganizer_SITE.models import Customer, Session, Exercise, Evolution
+from Fisiorganizer_SITE.models import AccountingEntryCategory, AccountingEntryType, Customer, Session, Exercise, Evolution, AccountingEntry
 import datetime
 
 
@@ -67,5 +67,31 @@ class ExerciseForm(ModelForm):
 class EvolutionForm(ModelForm):
     class Meta:
         model = Evolution
-        fields = "__all__"
+        fields = ["id_customer", "date", "evolution_text"]
 
+        widgets = {
+            'date': DateInput(),
+        }
+
+        labels = {
+            'id_customer': 'Paciente',
+            'date': 'Data',
+            'evolution_text': 'Evolução'
+        }
+
+class AccountingEntryForm(ModelForm):
+    class Meta:
+        model = AccountingEntry
+        fields = ['id_type','id_category', 'date', 'amount', 'description']
+        
+        widgets = {
+            'date': DateInput(),
+            'amount': forms.NumberInput(attrs={'step': '0.01'}),
+        }
+        labels = {
+            'id_type': 'Tipo',
+            'id_category': 'Categoria',
+            'date': 'Data',
+            'amount': 'Valor',
+            'description': 'Descrição'
+        }

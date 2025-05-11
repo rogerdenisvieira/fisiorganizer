@@ -3,18 +3,18 @@
 {% load static %}
 {% block content %}
 
-    <h1 class="text-center">Nova Evolução</h1>
+    <h1 class="text-center">Novo Lançamento</h1>
 
 <div class="col-sm-2"></div>
 
 <div class="col-md-8">
     
 <hr>    
-    <form class="form-group" action="{% url 'evolution_create' %}" method="post" enctype="multipart/form-data">
+    <form class="form-group" action="{% url 'accounting_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         
-        {% for field in evolutionForm %}
+        {% for field in accountingEntryForm %}
         
         <label>{{field.label}}</label>
         <p>{{field|add_class:"form-control"}}</p>

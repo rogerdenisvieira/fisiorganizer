@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from Fisiorganizer_SITE.forms import SessionForm
-from Fisiorganizer_SITE.controllers import session_controller
+from Fisiorganizer_SITE.views import session
 from Fisiorganizer_SITE.models import Session, SessionExercise, Exercise
 
 
@@ -19,7 +19,7 @@ def create(request):
             session.save()
 
             print('saving session into db')
-            return redirect(session_controller.list)
+            return redirect(session.list)
         else:
             print(session_form.errors)
     else:

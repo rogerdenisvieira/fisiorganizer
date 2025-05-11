@@ -15,7 +15,7 @@ class Customer(models.Model):
     details = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
-        return str(self.id) + ' - ' + self.name
+        return self.name
 
 
 class Modality(models.Model):
@@ -107,7 +107,30 @@ class Evolution(models.Model):
     id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateField()
     evolution_text = models.TextField(max_length=500, blank=False)
+
+class AccountingEntryType(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=150, blank=False)
+    def __str__(self):
+        return str(self.id) + ' - ' + self.name
+
+class AccountingEntryCategory(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=150, blank=False)
+    id_type = models.ForeignKey(AccountingEntryType, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.id) + ' - ' + self.name
+
+class AccountingEntry(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_type = models.ForeignKey(AccountingEntryType, on_delete=models.CASCADE)
+    id_category = models.ForeignKey(AccountingEntryCategory, on_delete=models.CASCADE)
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(max_length=500, blank=False)
     
+    def __str__(self):
+        return str(self.id) + ' - ' + self.name
 
     
 
