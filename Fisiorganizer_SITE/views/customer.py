@@ -23,7 +23,7 @@ def create(request):
             customer.save()
 
             print('object saved')
-            return redirect(customer.list)
+            return redirect(list)
         else:
             print(form.errors)
     else:
